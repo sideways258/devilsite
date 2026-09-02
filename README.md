@@ -1,112 +1,119 @@
-# Devils in the Details — landing page + playable demo
+# Devils in the Details — site + 3D co-op game
 
-A one-page, colorful landing site plus a browser side-scroller demo. Plain HTML/CSS/JS served by nginx — no build step, no dependencies.
+A small colourful marketing site **and** a playable 3D side-scroller, served by one
+tiny Node server. The game is plain ES modules + [Three.js](https://threejs.org)
+(vendored, no build step). Multiplayer is a lightweight WebSocket relay in the
+same process.
 
 ```
-index.html          landing page
-styles.css
-script.js            hero "spot the devil" widget
-game.html           playable side-scroller ("Details Runs the House")
-game.css
-game.js             canvas game: hero Details + 5 devil types
-Dockerfile
-docker-compose.yml
+public/                 ← everything served to the browser
+  index.html            landing page
+  styles.css  script.js
+  game.html             the game
+  game.css
+  js/
+    main.js             glue: loop, input, HUD, net wiring
+    scene.js            three.js renderer / camera / lights
+    level.js            level geometry, themes, enemy roster
+    player.js           hero "Details" + remote-player ghosts
+    enemies.js          the 5 devil types + Baron Marrow (boss)
+    dialog.js           typewriter text box
+    story.js            the script (all dialogue lives here)
+    net.js              WebSocket client + offline/solo fallback
+  vendor/three.module.js
+server/
+  server.js             static file server + multiplayer relay
+  package.json          one dependency: ws
+Dockerfile  docker-compose.yml
 .github/workflows/docker-publish.yml
 ```
 
-## The game
+## The game — "Details Runs the House"
 
-`game.html` is a self-contained canvas side-scroller reachable from the landing
-page's **Play the demo** buttons. You play as **Details** and cross the house,
-landing on devils to catch them before you reach the far door. Five devil types,
-each with its own behaviour:
+The house swallowed Cora through the living-room floor. You play as **Details**,
+crossing three rooms (Living Room → Kitchen → Basement) to get her back from
+**Baron Marrow**, who is sitting on a throne of stolen remote controls.
 
-| Devil | Behaviour |
-|-------|-----------|
-| The Untier | paces a stretch of floor back and forth |
-| The Swapper | blinks out, then reappears a step closer to you |
-| The Flicker | winks in and out on a beat; only solid while visible |
-| The Gnawer | hops in arcs toward you |
-| The Smudge | drifts through the air on a sine wave |
+It renders in 3D (perspective camera, real lights, shadows, fog) but plays as a
+strict side-scroller — X to run, Y to jump, depth is locked.
 
-Controls: arrows / WASD to move, Space / Up / W to jump, P to pause, R to
-restart. On touch devices, on-screen buttons appear.
+**Five devil types**, each with distinct behaviour:
 
-## 1. Push this to GitHub
+| Devil | Colour | Behaviour |
+|-------|--------|-----------|
+| The Untier  | flame | paces a stretch of floor |
+| The Swapper | pink  | goes intangible, then blinks a step closer |
+| The Flicker | gold  | winks in and out on a beat; only solid while visible |
+| The Gnawer  | green | hops toward you in arcs |
+| The Smudge  | smoke | drifts through the air on a sine wave |
 
-```bash
-cd devils-site
-git init
-git add .
-git commit -m "Initial site"
-git branch -M main
-git remote add origin https://github.com/YOUR-GITHUB-USERNAME/YOUR-REPO-NAME.git
-git push -u origin main
-```
+Catch a devil by landing on its head. Bump one any other way and you lose a
+heart (they refill over time; no game over — you respawn at the last checkpoint).
+Collect misplaced **socks** for score. Baron Marrow takes three stomps, but only
+while he stops to gloat.
 
-(Create the empty repo on GitHub first — github.com → New repository — then use its URL above.)
+**Story & dialogue** — a classic typewriter text box. All lines are in
+`public/js/story.js`; beats fire as you walk past fixed points in the level and,
+in multiplayer, are kept in sync and in order by the server.
 
-## 2. Let GitHub build the Docker image for you
+### Multiplayer
 
-This repo includes `.github/workflows/docker-publish.yml`, a GitHub Actions workflow that automatically:
+Everyone who enters the same **room** name lands in the same house and sees each
+other move in real time (translucent coloured "ghosts"). Enemy kills, story
+progress, stage changes, boss HP and the win state are all synced. Press **T** to
+chat. Share a room with `?room=NAME` in the URL.
 
-- builds the Docker image on every push to `main`
-- publishes it to GitHub Container Registry (GHCR) as `ghcr.io/YOUR-GITHUB-USERNAME/YOUR-REPO-NAME:latest`
-- builds for both `amd64` and `arm64`, so it runs on Unraid regardless of CPU
+If there is no server (page opened from a file, relay unreachable) the game
+detects it and runs **solo** with the same content — the HUD shows `offline — solo`.
 
-No extra setup needed — it uses the automatic `GITHUB_TOKEN`, nothing to configure. After your first push, check the **Actions** tab on GitHub to watch it build (~1 minute).
+### Controls
 
-By default, GHCR packages are private. Make it public so Unraid can pull it without logging in:
-`github.com/YOUR-GITHUB-USERNAME?tab=packages` → click the package → **Package settings** → **Change visibility** → **Public**.
+| | |
+|---|---|
+| Move | `←` `→` or `A` `D` |
+| Jump | `Space`, `W`, or `↑` |
+| Advance dialogue | `Space` / `Enter` |
+| Chat (online) | `T` |
+| Restart the room | `R` |
 
-## 3. Run it on Unraid — no local build required
+On phones/tablets, on-screen buttons appear automatically.
 
-Edit `docker-compose.yml` and replace `YOUR-GITHUB-USERNAME/YOUR-REPO-NAME` with your actual repo, then:
-
-### Option A — Compose Manager plugin
-1. Install **Compose Manager** from Community Apps if you don't have it.
-2. Copy `docker-compose.yml` to `/mnt/user/appdata/devils-site/` on Unraid (this file alone is enough — Unraid just pulls the pre-built image).
-3. Compose Manager → add stack pointing at that folder → **Compose Up**.
-4. Visit `http://<your-unraid-ip>:8088`.
-
-### Option B — Unraid's "Add Container" GUI
-1. **Docker → Add Container**.
-2. Repository: `ghcr.io/YOUR-GITHUB-USERNAME/YOUR-REPO-NAME:latest`
-3. Port mapping: Container Port `80` → Host Port `8088` (or any free port).
-4. Apply. Unraid pulls the image straight from GHCR — nothing to build.
-
-### Option C — plain `docker` commands over SSH
-```bash
-docker pull ghcr.io/YOUR-GITHUB-USERNAME/YOUR-REPO-NAME:latest
-docker run -d \
-  --name devils-in-the-details \
-  --restart unless-stopped \
-  -p 8088:80 \
-  ghcr.io/YOUR-GITHUB-USERNAME/YOUR-REPO-NAME:latest
-```
-
-## Updating the content later
-
-Edit `index.html` / `styles.css` / `script.js`, then:
+## Run it locally
 
 ```bash
-git add .
-git commit -m "Update copy"
-git push
+cd server
+npm install
+npm start          # serves http://localhost:8080  (site + game + multiplayer)
 ```
 
-GitHub Actions rebuilds and republishes the image automatically. On Unraid, just re-pull and restart the container:
+Open two browser tabs on `http://localhost:8080/game.html`, enter the same room
+name in both, and you're playing co-op.
+
+## Docker
+
+The image is now a Node server instead of static nginx.
 
 ```bash
-docker compose pull && docker compose up -d
+docker compose up -d --build      # http://localhost:8088
 ```
 
-(or in the GUI: click the container → **Force Update**).
+`docker-compose.yml` maps host `8088` → container `8080`. WebSockets run on that
+same port, so any reverse proxy in front of it must forward the
+`Upgrade` / `Connection` headers (Nginx Proxy Manager: enable "Websockets
+Support"; SWAG: the sample proxy confs already do this).
 
-## No internet access from Unraid to GHCR?
+### GitHub Actions → GHCR (unchanged workflow)
 
-Uncomment the `build: .` line in `docker-compose.yml` (and comment out `image:`), then clone the repo onto Unraid directly and run `docker compose up -d --build` — this builds locally from source instead of pulling a pre-built image.
+`.github/workflows/docker-publish.yml` still builds `linux/amd64` + `linux/arm64`
+on every push to `main` and publishes to
+`ghcr.io/<user>/<repo>:latest`. Nothing to configure — it uses the automatic
+`GITHUB_TOKEN`. Make the package public if your host pulls anonymously.
 
-## Putting it behind a domain name
+## Editing content later
 
-If you're already running **Nginx Proxy Manager** or **SWAG** on Unraid, point a proxy host at `http://<unraid-ip>:8088` and it'll pick up SSL/your domain the same way your other containers do.
+- **Dialogue / story beats** — `public/js/story.js`
+- **Level shape, enemy placements, room themes** — `public/js/level.js`
+- **Landing-page copy** — `public/index.html`
+
+Commit, push, and Actions rebuilds the image; on the host, `docker compose pull &&
+docker compose up -d` (or "Force Update" in the Unraid GUI).

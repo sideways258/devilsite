@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Details Runs the House — Devils in the Details</title>
+<meta name="description" content="A 3D co-op side-scroller. Play as Details, cross the house, and get Cora back before the mischief finishes itself.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="game.css">
+
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.js" } }
+</script>
+</head>
+<body>
+
+<div id="stage">
+  <canvas id="game"></canvas>
+
+  <!-- HUD -->
+  <div id="hud">
+    <div class="hud-left">
+      <div id="hud-hearts" class="hud-hearts" aria-label="Health"></div>
+      <div id="hud-socks" class="hud-chip">🧦 <span>0</span></div>
+    </div>
+    <div class="hud-mid">
+      <div id="hud-stage">The Living Room</div>
+      <div id="hud-bar"><span id="hud-bar-fill"></span></div>
+    </div>
+    <div class="hud-right">
+      <div id="hud-net" class="hud-chip">connecting…</div>
+      <div id="hud-players" class="hud-players"></div>
+    </div>
+  </div>
+
+  <!-- boss bar -->
+  <div id="bossbar" hidden>
+    <span>Baron Marrow</span>
+    <div id="bossbar-track"><i id="bossbar-fill"></i></div>
+  </div>
+
+  <!-- dialog box -->
+  <div id="dialog">
+    <div id="dialog-name">Details</div>
+    <p id="dialog-body"></p>
+    <div id="dialog-hint">Space — next</div>
+  </div>
+
+  <!-- chat -->
+  <div id="chat">
+    <div id="chat-log"></div>
+    <input id="chat-input" type="text" maxlength="160" placeholder="Press T to chat…" hidden>
+  </div>
+
+  <!-- toasts -->
+  <div id="toasts"></div>
+
+  <!-- touch controls -->
+  <div id="touch" aria-hidden="true">
+    <div class="touch-pad">
+      <button data-key="left" aria-label="Left">◀</button>
+      <button data-key="right" aria-label="Right">▶</button>
+    </div>
+    <button data-key="jump" class="touch-jump" aria-label="Jump">▲</button>
+  </div>
+
+  <!-- title / overlay -->
+  <div id="overlay">
+    <div class="overlay-card">
+      <p class="overlay-kicker">Devils in the Details</p>
+      <h1 id="overlay-title">DETAILS RUNS THE HOUSE</h1>
+      <p id="overlay-text">
+        The house swallowed Cora through the living-room floor. Cross three rooms,
+        catch five kinds of devil by landing on them, and get her back.
+        Play solo or drop into the same room as your friends.
+      </p>
+      <div class="overlay-form" id="overlay-form">
+        <label>Name <input id="in-name" type="text" maxlength="16" placeholder="Detail" autocomplete="off"></label>
+        <label>Room <input id="in-room" type="text" maxlength="24" placeholder="house" autocomplete="off"></label>
+        <button id="btn-start" class="btn-primary">Enter the house</button>
+      </div>
+      <p class="overlay-controls">
+        Move <b>← →</b> / <b>A D</b> &nbsp;·&nbsp; Jump <b>Space</b> / <b>W</b> &nbsp;·&nbsp;
+        Talk-through <b>Space</b> &nbsp;·&nbsp; Chat <b>T</b> &nbsp;·&nbsp; Restart room <b>R</b>
+      </p>
+      <a class="overlay-back" href="index.html">← back to the site</a>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>

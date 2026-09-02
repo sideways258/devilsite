@@ -1,17 +1,19 @@
-FROM nginx:alpine
+FROM node:20-alpine
 
-# Remove default nginx welcome page
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
 
-# Copy the site
-COPY index.html /usr/share/nginx/html/
-COPY styles.css /usr/share/nginx/html/
-COPY script.js /usr/share/nginx/html/
-COPY game.html /usr/share/nginx/html/
-COPY game.css /usr/share/nginx/html/
-COPY game.js /usr/share/nginx/html/
+# install server deps (only "ws")
+COPY server/package.json server/package-lock.json ./server/
+RUN cd server && npm ci --omit=dev --no-audit --no-fund
 
-EXPOSE 80
+# app code
+COPY server ./server
+COPY public ./public
+
+ENV PORT=8080
+EXPOSE 8080
 
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD wget --quiet --tries=1 --spider http://localhost/ || exit 1
+  CMD wget --quiet --tries=1 --spider http://localhost:8080/healthz || exit 1
+
+CMD ["node", "server/server.js"]
