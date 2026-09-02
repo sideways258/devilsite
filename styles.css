@@ -71,6 +71,8 @@ img, svg { display: block; max-width: 100%; }
 .nav__links a { text-decoration: none; opacity: 0.85; }
 .nav__links a:hover { opacity: 1; }
 
+.nav__actions { display: flex; align-items: center; gap: 10px; }
+
 @media (max-width: 720px) {
   .nav__links { display: none; }
 }
