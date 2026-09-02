@@ -1,0 +1,114 @@
+/* ---------- GAME PAGE ---------- */
+.game-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-nav {
+  width: 100%;
+  max-width: var(--max);
+}
+
+.game-wrap {
+  flex: 1;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 8px clamp(12px, 4vw, 40px) 48px;
+}
+
+.game-stage {
+  position: relative;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 3px solid rgba(255, 243, 230, 0.1);
+  background: var(--bg-alt);
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.7);
+}
+
+#game {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  image-rendering: -webkit-optimize-contrast;
+  touch-action: none;
+}
+
+/* ---------- TOUCH CONTROLS ---------- */
+.touch {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: none;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 16px;
+  pointer-events: none;
+}
+
+.touch__pad { display: flex; gap: 12px; }
+
+.touch__btn {
+  pointer-events: auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 243, 230, 0.4);
+  background: rgba(26, 14, 30, 0.55);
+  color: var(--cream);
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
+}
+
+.touch__btn:active { background: rgba(255, 90, 54, 0.6); }
+.touch__btn--jump { width: 78px; height: 78px; font-size: 1.7rem; }
+
+@media (hover: none) and (pointer: coarse) {
+  .touch { display: flex; }
+}
+
+/* ---------- META ---------- */
+.game-meta { margin-top: 20px; }
+
+.game-legend {
+  font-size: 0.92rem;
+  color: rgba(255, 243, 230, 0.8);
+  margin-bottom: 16px;
+}
+
+.game-legend strong {
+  font-family: 'Fredoka', sans-serif;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.roster-mini {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px 24px;
+  grid-template-columns: 1fr;
+  font-size: 0.9rem;
+  color: rgba(255, 243, 230, 0.8);
+}
+
+@media (min-width: 640px) {
+  .roster-mini { grid-template-columns: repeat(2, 1fr); }
+}
+
+.roster-mini .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}

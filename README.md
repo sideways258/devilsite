@@ -1,15 +1,36 @@
-# Devils in the Details — landing page
+# Devils in the Details — landing page + playable demo
 
-A one-page, colorful landing site for the game demo. Plain HTML/CSS/JS served by nginx — no build step, no dependencies.
+A one-page, colorful landing site plus a browser side-scroller demo. Plain HTML/CSS/JS served by nginx — no build step, no dependencies.
 
 ```
-index.html
+index.html          landing page
 styles.css
-script.js
+script.js            hero "spot the devil" widget
+game.html           playable side-scroller ("Details Runs the House")
+game.css
+game.js             canvas game: hero Details + 5 devil types
 Dockerfile
 docker-compose.yml
 .github/workflows/docker-publish.yml
 ```
+
+## The game
+
+`game.html` is a self-contained canvas side-scroller reachable from the landing
+page's **Play the demo** buttons. You play as **Details** and cross the house,
+landing on devils to catch them before you reach the far door. Five devil types,
+each with its own behaviour:
+
+| Devil | Behaviour |
+|-------|-----------|
+| The Untier | paces a stretch of floor back and forth |
+| The Swapper | blinks out, then reappears a step closer to you |
+| The Flicker | winks in and out on a beat; only solid while visible |
+| The Gnawer | hops in arcs toward you |
+| The Smudge | drifts through the air on a sine wave |
+
+Controls: arrows / WASD to move, Space / Up / W to jump, P to pause, R to
+restart. On touch devices, on-screen buttons appear.
 
 ## 1. Push this to GitHub
 

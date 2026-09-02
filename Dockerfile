@@ -7,6 +7,9 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY index.html /usr/share/nginx/html/
 COPY styles.css /usr/share/nginx/html/
 COPY script.js /usr/share/nginx/html/
+COPY game.html /usr/share/nginx/html/
+COPY game.css /usr/share/nginx/html/
+COPY game.js /usr/share/nginx/html/
 
 EXPOSE 80
 
