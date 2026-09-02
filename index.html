@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devils in the Details — a game about noticing</title>
+<meta name="description" content="Devils in the Details is a puzzle game about spotting the tiny devils sneaking mischief into ordinary rooms before the chaos gets out of hand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <a class="nav__logo" href="#top">
+    <svg class="nav__logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+      <path d="M20 4c-2.5 0-4 2.2-4 4.4 0 1-1.6.6-2.6 1.4C10.8 12 9 15.4 9 19.5 9 27 13.8 33 20 33s11-6 11-13.5c0-4.1-1.8-7.5-4.4-9.7-1-.8-2.6-.4-2.6-1.4 0-2.2-1.5-4.4-4-4.4z" fill="var(--flame)"/>
+      <ellipse cx="15.5" cy="20" rx="2.6" ry="3.2" fill="var(--ink)"/>
+      <ellipse cx="24.5" cy="20" rx="2.6" ry="3.2" fill="var(--ink)"/>
+      <path d="M14 27c2 2 10 2 12 0" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+    <span>Devils in the Details</span>
+  </a>
+  <nav class="nav__links">
+    <a href="#premise">The idea</a>
+    <a href="#roster">The devils</a>
+    <a href="#scenes">Screens</a>
+  </nav>
+  <a class="btn btn--small btn--gold" href="#wishlist">Wishlist</a>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__copy">
+      <p class="hero__kicker">A spot-the-mischief puzzle game</p>
+      <h1 class="hero__title">Look closer.<br>They're already inside.</h1>
+      <p class="hero__sub">Every room in this game looks perfectly normal — until a devil the size of your thumb starts quietly ruining someone's day. Catch them before the mischief finishes itself.</p>
+      <div class="hero__actions">
+        <a class="btn btn--flame" href="#demo">Play the demo</a>
+        <a class="btn btn--ghost" href="#wishlist">Wishlist it</a>
+      </div>
+    </div>
+
+    <div class="hero__scene-wrap">
+      <div class="scene" id="scene" aria-label="Find the three hidden devils in this living room">
+        <svg class="scene__art" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+          <rect width="640" height="480" fill="var(--bg-alt)"/>
+          <rect x="0" y="360" width="640" height="120" fill="#3d1f47"/>
+          <rect x="60" y="60" width="200" height="150" rx="6" fill="#4a2454"/>
+          <rect x="60" y="60" width="200" height="150" rx="6" fill="none" stroke="#5c2f68" stroke-width="6"/>
+          <rect x="90" y="90" width="60" height="90" fill="#2a1332"/>
+          <rect x="165" y="90" width="60" height="90" fill="#2a1332"/>
+          <rect x="330" y="40" width="14" height="340" fill="#5c2f68"/>
+          <rect x="330" y="70" width="140" height="18" fill="#2a1332"/>
+          <rect x="330" y="130" width="140" height="18" fill="#2a1332"/>
+          <rect x="330" y="190" width="140" height="18" fill="#2a1332"/>
+          <rect x="340" y="72" width="30" height="14" fill="var(--gold)"/>
+          <rect x="390" y="132" width="24" height="14" fill="var(--pink)"/>
+          <rect x="350" y="192" width="40" height="14" fill="var(--flame)"/>
+          <ellipse cx="480" cy="360" rx="140" ry="26" fill="#4a2454"/>
+          <ellipse cx="480" cy="356" rx="120" ry="20" fill="#5c2f68"/>
+          <rect x="150" y="260" width="150" height="100" rx="14" fill="#e8c76b"/>
+          <rect x="150" y="260" width="150" height="20" rx="10" fill="#f2d98a"/>
+          <rect x="130" y="340" width="20" height="30" fill="#c9a24f"/>
+          <rect x="280" y="340" width="20" height="30" fill="#c9a24f"/>
+          <circle cx="500" cy="150" r="40" fill="#3a4a2e"/>
+          <circle cx="470" cy="130" r="30" fill="#43542f"/>
+          <circle cx="530" cy="140" r="28" fill="#3a4a2e"/>
+          <rect x="490" y="180" width="20" height="70" fill="#5c4028"/>
+          <rect x="565" y="90" width="16" height="180" fill="#6b3a20"/>
+          <ellipse cx="573" cy="82" rx="46" ry="22" fill="var(--gold)"/>
+          <ellipse cx="573" cy="86" rx="34" ry="14" fill="#f2d98a"/>
+
+          <g class="devil devil--1" data-devil="1" tabindex="0" role="button" aria-label="A hidden devil behind the plant" transform="translate(452,168)">
+            <path d="M14 0c-1.6 0-2.6 1.4-2.6 2.8 0 .6-1 .4-1.7.9C8 5.2 7 7 7 9.4 7 13.6 10 17 14 17s7-3.4 7-7.6c0-2.4-1-4.2-2.7-5.7-.7-.5-1.7-.3-1.7-.9C16.6 1.4 15.6 0 14 0z" fill="var(--flame)"/>
+            <circle cx="11.5" cy="9.6" r="1.5" fill="var(--ink)"/>
+            <circle cx="16.5" cy="9.6" r="1.5" fill="var(--ink)"/>
+          </g>
+
+          <g class="devil devil--2" data-devil="2" tabindex="0" role="button" aria-label="A hidden devil peeking from the bookshelf" transform="translate(345,58)">
+            <path d="M14 0c-1.6 0-2.6 1.4-2.6 2.8 0 .6-1 .4-1.7.9C8 5.2 7 7 7 9.4 7 13.6 10 17 14 17s7-3.4 7-7.6c0-2.4-1-4.2-2.7-5.7-.7-.5-1.7-.3-1.7-.9C16.6 1.4 15.6 0 14 0z" fill="var(--pink)"/>
+            <circle cx="11.5" cy="9.6" r="1.5" fill="var(--ink)"/>
+            <circle cx="16.5" cy="9.6" r="1.5" fill="var(--ink)"/>
+          </g>
+
+          <g class="devil devil--3" data-devil="3" tabindex="0" role="button" aria-label="A hidden devil under the rug" transform="translate(210,344)">
+            <path d="M14 0c-1.6 0-2.6 1.4-2.6 2.8 0 .6-1 .4-1.7.9C8 5.2 7 7 7 9.4 7 13.6 10 17 14 17s7-3.4 7-7.6c0-2.4-1-4.2-2.7-5.7-.7-.5-1.7-.3-1.7-.9C16.6 1.4 15.6 0 14 0z" fill="var(--gold)"/>
+            <circle cx="11.5" cy="9.6" r="1.5" fill="var(--ink)"/>
+            <circle cx="16.5" cy="9.6" r="1.5" fill="var(--ink)"/>
+          </g>
+        </svg>
+
+        <p class="scene__counter"><span id="foundCount">0</span> / 3 spotted — try clicking them</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMISE -->
+  <section class="premise" id="premise">
+    <div class="premise__text">
+      <h2>Nothing's broken. Yet.</h2>
+      <p>A shoelace comes undone on its own. The salt shaker is suddenly full of sugar. The remote turns up in the freezer. None of it is an accident — it's the work of devils no taller than a pencil, and they've made your house their playground.</p>
+      <p>You don't fight them. You just have to notice them in time, before whatever they're building toward finishes itself. Some are lazy and obvious. Some have been planning this for three rooms.</p>
+    </div>
+    <svg class="premise__art" viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="92" fill="var(--bg-alt)"/>
+      <circle cx="100" cy="100" r="92" fill="none" stroke="var(--flame)" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+      <path d="M100 55c-3.4 0-5.6 3-5.6 6 0 1.3-2.1.9-3.6 1.9-3.6 2.4-5.8 6.6-5.8 11.4 0 9 6.7 16.2 15 16.2s15-7.2 15-16.2c0-4.8-2.2-9-5.8-11.4-1.5-1-3.6-.6-3.6-1.9 0-3-2.2-6-5.6-6z" fill="var(--flame)"/>
+      <circle cx="94.5" cy="76" r="3" fill="var(--ink)"/>
+      <circle cx="105.5" cy="76" r="3" fill="var(--ink)"/>
+      <path d="M92 86c3 3 13 3 16 0" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+      <path d="M70 130c14-10 46-10 60 0" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M74 148c12-6 40-6 52 0" stroke="var(--pink)" stroke-width="3" stroke-linecap="round" fill="none"/>
+    </svg>
+  </section>
+
+  <!-- HOW IT PLAYS -->
+  <section class="mechanics">
+    <h2>How it plays</h2>
+    <div class="mechanics__grid">
+      <div class="mechanic">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="20" cy="20" r="14" fill="none" stroke="var(--flame)" stroke-width="4"/><line x1="30" y1="30" x2="42" y2="42" stroke="var(--flame)" stroke-width="4" stroke-linecap="round"/></svg>
+        <h3>Study the scene</h3>
+        <p>Nothing points anything out for you. You scan a room the way you'd scan a room in real life — a little skeptical, a little slow.</p>
+      </div>
+      <div class="mechanic">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16" fill="var(--gold)"/><circle cx="19" cy="22" r="2.4" fill="var(--ink)"/><circle cx="29" cy="22" r="2.4" fill="var(--ink)"/></svg>
+        <h3>Catch it before it finishes</h3>
+        <p>Every devil is mid-plan. Tap it fast enough and its mischief undoes itself. Too slow, and that little disaster becomes permanent.</p>
+      </div>
+      <div class="mechanic">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 34l14-24 14 24z" fill="var(--pink)"/><circle cx="22" cy="30" r="3" fill="var(--ink)"/></svg>
+        <h3>Rooms get busier</h3>
+        <p>Later scenes hide two, then three, then a whole family of devils at once — and some of them are very good at looking like furniture.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROSTER -->
+  <section class="roster" id="roster">
+    <h2>Meet the household</h2>
+    <p class="roster__intro">Every devil in the game has a specialty. Here are three you'll learn to hate almost immediately.</p>
+    <div class="roster__grid">
+      <article class="devil-card">
+        <svg class="devil-card__art" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="56" fill="#3d1f47"/>
+          <path d="M60 30c-4 0-6.6 3.4-6.6 7 0 1.6-2.4 1-4.2 2.2-4.2 2.8-6.8 7.6-6.8 13.2 0 10.4 7.8 18.6 17.6 18.6s17.6-8.2 17.6-18.6c0-5.6-2.6-10.4-6.8-13.2-1.8-1.2-4.2-.6-4.2-2.2 0-3.6-2.6-7-6.6-7z" fill="var(--flame)"/>
+          <circle cx="53.5" cy="55" r="3.2" fill="var(--ink)"/>
+          <circle cx="66.5" cy="55" r="3.2" fill="var(--ink)"/>
+          <path d="M51 65c5 4 13 4 18 0" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        </svg>
+        <h3>The Untier</h3>
+        <p class="devil-card__role">Specialty: shoelaces, ribbons, patience</p>
+        <p>Works slowly, one loop at a time, always right as you're about to leave the house.</p>
+      </article>
+      <article class="devil-card">
+        <svg class="devil-card__art" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="56" fill="#3d1f47"/>
+          <path d="M60 30c-4 0-6.6 3.4-6.6 7 0 1.6-2.4 1-4.2 2.2-4.2 2.8-6.8 7.6-6.8 13.2 0 10.4 7.8 18.6 17.6 18.6s17.6-8.2 17.6-18.6c0-5.6-2.6-10.4-6.8-13.2-1.8-1.2-4.2-.6-4.2-2.2 0-3.6-2.6-7-6.6-7z" fill="var(--pink)"/>
+          <circle cx="53.5" cy="55" r="3.2" fill="var(--ink)"/>
+          <circle cx="66.5" cy="55" r="3.2" fill="var(--ink)"/>
+          <path d="M51 65c5 4 13 4 18 0" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        </svg>
+        <h3>The Swapper</h3>
+        <p class="devil-card__role">Specialty: labels, remotes, left socks</p>
+        <p>Doesn't destroy anything — just moves it three feet away from where it should be, forever.</p>
+      </article>
+      <article class="devil-card">
+        <svg class="devil-card__art" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="56" fill="#3d1f47"/>
+          <path d="M60 30c-4 0-6.6 3.4-6.6 7 0 1.6-2.4 1-4.2 2.2-4.2 2.8-6.8 7.6-6.8 13.2 0 10.4 7.8 18.6 17.6 18.6s17.6-8.2 17.6-18.6c0-5.6-2.6-10.4-6.8-13.2-1.8-1.2-4.2-.6-4.2-2.2 0-3.6-2.6-7-6.6-7z" fill="var(--gold)"/>
+          <circle cx="53.5" cy="55" r="3.2" fill="var(--ink)"/>
+          <circle cx="66.5" cy="55" r="3.2" fill="var(--ink)"/>
+          <path d="M51 65c5 4 13 4 18 0" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        </svg>
+        <h3>The Flicker</h3>
+        <p class="devil-card__role">Specialty: lightbulbs, wifi, your patience</p>
+        <p>Small, twitchy, and convinced that every light in the house should flicker exactly once, at random.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SCREENS -->
+  <section class="scenes" id="scenes">
+    <h2>A few more rooms</h2>
+    <div class="scenes__grid">
+      <div class="scene-thumb scene-thumb--kitchen">
+        <span>Kitchen — 4 devils</span>
+      </div>
+      <div class="scene-thumb scene-thumb--bedroom">
+        <span>Bedroom — 2 devils</span>
+      </div>
+      <div class="scene-thumb scene-thumb--office">
+        <span>Home office — 6 devils</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="wishlist">
+    <h2>Ready to get caught looking?</h2>
+    <p>The demo covers the first three rooms. Wishlist the full game to get notified the day the rest of the house unlocks.</p>
+    <div class="cta__actions">
+      <a class="btn btn--dark" id="demo" href="#">Play the demo</a>
+      <a class="btn btn--outline-dark" href="#">Wishlist on Steam</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__logo">
+    <svg viewBox="0 0 40 40" aria-hidden="true" width="24" height="24">
+      <path d="M20 4c-2.5 0-4 2.2-4 4.4 0 1-1.6.6-2.6 1.4C10.8 12 9 15.4 9 19.5 9 27 13.8 33 20 33s11-6 11-13.5c0-4.1-1.8-7.5-4.4-9.7-1-.8-2.6-.4-2.6-1.4 0-2.2-1.5-4.4-4-4.4z" fill="var(--flame)"/>
+    </svg>
+    <span>Devils in the Details</span>
+  </div>
+  <p>&copy; <span id="year"></span> made with a suspicious amount of attention to detail.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

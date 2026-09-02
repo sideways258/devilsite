@@ -1,0 +1,15 @@
+services:
+  devils-in-the-details:
+    # Pulls the image GitHub Actions builds and publishes automatically on every push to main.
+    # Replace YOUR-GITHUB-USERNAME and YOUR-REPO-NAME below.
+    image: ghcr.io/YOUR-GITHUB-USERNAME/YOUR-REPO-NAME:latest
+    container_name: devils-in-the-details
+    restart: unless-stopped
+    ports:
+      - "8088:80"   # change 8088 to whatever host port you want on Unraid
+
+# --- Alternative: build locally from the repo instead of pulling from GHCR ---
+# Comment out "image:" above and uncomment "build:" below if you'd rather
+# build the image on the Unraid box itself (e.g. no internet access to GHCR).
+#
+#    build: .
